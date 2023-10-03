@@ -1,19 +1,21 @@
 import React from 'react';
 
-const MinutesToRead = ({ time }) => {
-  const renderCoffeeCups = () => {
-    const coffeeCups = Math.ceil(time / 5);
-    return '☕️'.repeat(coffeeCups);
+const MinutesToRead = ({ minutes }) => {
+  const renderIcons = (icon, count) => {
+    return Array.from({ length: count }, (_, index) => (
+      <span key={index}>{icon}</span>
+    ));
   };
 
-  const renderBentoBoxes = () => {
-    const bentoBoxes = Math.ceil(time / 10);
-    return '🍱'.repeat(bentoBoxes);
-  };
+  const coffeeCount = Math.ceil(minutes / 5);
+  const bentoCount = Math.ceil(minutes / 10);
 
   return (
     <div>
-      {time <= 30 ? renderCoffeeCups() : renderBentoBoxes()} {time} min read
+      {minutes <= 30
+        ? renderIcons('☕️', coffeeCount)
+        : renderIcons('🍱', bentoCount)}
+      {minutes} min read
     </div>
   );
 };
